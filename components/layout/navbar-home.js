@@ -25,7 +25,7 @@ export default function NavbarHome() {
                     <Nav.Link href="#features">Features</Nav.Link>
                     <Nav.Link href="#pricing">Pricing</Nav.Link>
                 </Nav>
-                <NavLink href="#">Login</NavLink>
+                <NavLink href="../../api/hello">Login</NavLink>
                 <NavLink href="#">Logout</NavLink>
     
             </Navbar>
