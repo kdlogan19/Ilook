@@ -16,6 +16,15 @@ const userSchema = mongoose.Schema({
         trim: true,
         required: [true, 'please add your last name'],
     },
+    username: {
+        type: String,
+        trim: true,
+        required: [true, 'please add your username'],
+    },
+    password: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         trim: true,
@@ -34,8 +43,41 @@ const userSchema = mongoose.Schema({
                 throw new Error("Not a valid URL")
             }
         }
+    },
+    terms: {
+        type: Boolean
     }
   
 }, {timestamps: true})
- 
-export default mongoose.model.User || mongoose.model('User', userSchema);
+
+
+//login validation
+userSchema.statics.findByCredentials = async (username, password) =>  {
+    await console.log("inside valiadtion model", username);
+    
+    const user = await User.findOne({username})
+    console.log("inside valiadtion model", user, username);
+    if(!user) {
+        throw new Error('User not valid')
+    }
+    // const isMatch = await bcrypt.compare(password, user.password)
+    console.log("user password in validation section",user.password);
+    
+    const isMatch = (password === user.password)
+    if(!isMatch){
+        throw new Error('Password invalid')
+    }
+
+    return user
+}
+
+
+let User;
+try {
+  User = mongoose.model('User')
+} catch (error) {
+  User = mongoose.model('User', userSchema)
+}
+
+// console.log(User.schema.obj)
+export default User;

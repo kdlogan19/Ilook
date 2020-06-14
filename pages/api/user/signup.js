@@ -1,5 +1,5 @@
-import dbconnect from '../../middleware/dbconnect'
-import User from '../../models/user'
+import dbconnect from '../../../middleware/dbconnect'
+import User from '../../../models/user'
 
 dbconnect()
 

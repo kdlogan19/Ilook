@@ -9,12 +9,17 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
+    "country-region-selector": "^0.5.1",
+    "formik": "^2.1.4",
+    "isomorphic-unfetch": "^3.0.0",
     "mongoose": "^5.9.18",
     "next": "9.4.4",
     "next-connect": "^0.7.1",
     "react": "16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-country-region-selector": "^2.1.0",
     "react-dom": "16.13.1",
-    "validator": "^13.1.1"
+    "validator": "^13.1.1",
+    "yup": "^0.29.1"
   }
 }
