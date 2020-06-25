@@ -2,7 +2,7 @@ import React from 'react'
 import {Formik} from 'formik'
 import * as yup from 'yup'
 import fetch from 'isomorphic-unfetch'
-import { useRouter, Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 import Navbar from '../../components/layout/navbar-home'
 

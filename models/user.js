@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import validator from 'validator'
+import ProjectIdea from './project-idea'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -35,6 +38,9 @@ const userSchema = mongoose.Schema({
             }
         }
     },
+    project: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'ProjectIdea'}
+    ],
     gitProfile: {
         type: String,
         trim: true,
@@ -47,28 +53,51 @@ const userSchema = mongoose.Schema({
     terms: {
         type: Boolean
     }
-  
 }, {timestamps: true})
+
+
+//Before saving, hashing the passwords
+userSchema.pre('save', async function (next) {
+    const user = this
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    next()
+})
 
 
 //login validation
 userSchema.statics.findByCredentials = async (username, password) =>  {
     await console.log("inside valiadtion model", username);
     
-    const user = await User.findOne({username})
-    console.log("inside valiadtion model", user, username);
+    const user = await User.findOne({username: username})    
+    console.log("in model side:",user.username);
+    
     if(!user) {
         throw new Error('User not valid')
     }
-    // const isMatch = await bcrypt.compare(password, user.password)
-    console.log("user password in validation section",user.password);
-    
-    const isMatch = (password === user.password)
+    const isMatch = await bcrypt.compare(password, user.password)
+    console.log("matched:", isMatch)
     if(!isMatch){
         throw new Error('Password invalid')
     }
 
     return user
+}
+
+
+//Generating JWT Token
+userSchema.methods.generateNewToken = async function() {
+    
+    const user = this
+    await console.log("inside generateNewToken");
+    
+    const token = await jwt.sign({_id: user._id}, 'iamironman')
+    user.tokens = user.tokens.concat({token})
+    await user.save()
+    await console.log("inside generateNewToken2");
+    return token
 }
 
 
