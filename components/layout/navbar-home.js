@@ -1,9 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
 import {Navbar, Button, Nav, Form, FormControl, NavLink} from 'react-bootstrap';
+import Cookies from 'js-cookie'
+import {useRouter} from 'next/router'
 
 
-export default function NavbarHome() {
+export default function NavbarHome({user}) {
+    const router = useRouter()
+    const logout = () => {
+        Cookies.remove('token')
+        router.push('/')
+      }
     return (
         <>
             <Head>
@@ -13,20 +20,20 @@ export default function NavbarHome() {
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
                     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-                    crossorigin="anonymous"
+                    crossOrigin="anonymous"
                 />
-                <link rel="stylesheet" href="../../styles/global.css"></link>
+
             </Head>
 
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                <Navbar.Brand href="/">Ilook</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
+                    <Nav.Link href="/user-pages/user-profile">Profile</Nav.Link>
+                    {/* <Nav.Link href="">Timeline</Nav.Link> */}
+    
                 </Nav>
-                <NavLink href="../../api/hello">Login</NavLink>
-                <NavLink href="#">Logout</NavLink>
+                {!user ? <NavLink href="/user-pages/user-login">Login</NavLink>:''}
+                {user?<NavLink onClick={logout}>Logout</NavLink>:''}
     
             </Navbar>
             <br />
