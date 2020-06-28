@@ -19,7 +19,7 @@ const projectIdeaSchema  = mongoose.Schema({
         trim: true
     },
     userId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
     like: {
@@ -33,7 +33,7 @@ const projectIdeaSchema  = mongoose.Schema({
     },
     comments: [{
         userId: {
-            type: String, 
+            type: mongoose.Schema.Types.ObjectId, 
             ref: 'User'
         },
         comment: {
@@ -48,6 +48,15 @@ const projectIdeaSchema  = mongoose.Schema({
     
 })
 
+projectIdeaSchema.statics.getAllProjects = async function() {
+    try {
+        const projects = await ProjectIdea.find().populate('userId','username').then(projects => {return projects})
+        console.log("projects in schema:", projects)
+        return projects
+    } catch (error) {
+        console.log("Database query:". error)   
+    }
+}
 
 let ProjectIdea;
 try {

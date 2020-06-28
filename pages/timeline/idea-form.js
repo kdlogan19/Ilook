@@ -36,7 +36,7 @@ export default function ideaForm({user, token}){
                 values.token = token
                 console.log("on submit event: ", values);
                 try {
-                    const res = await fetch('http://localhost:3000/api/timeline/idea-form', {
+                    const res = await fetch('http://localhost:3000/api/project/idea-form', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json",

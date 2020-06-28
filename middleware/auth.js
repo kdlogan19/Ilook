@@ -21,8 +21,7 @@ import User from '../models/user'
 
 const auth = async (token) => {
     try{    
-        console.log("request in auth", token);
-            
+        console.log("request in auth", token);   
         const decoded = jwt.verify(token, 'iamironman')
         console.log("decoded", decoded, token);                
         return {userId: decoded._id}

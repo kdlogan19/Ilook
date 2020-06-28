@@ -12,11 +12,14 @@ export default async (req, res) => {
             const {username, password} = data
             console.log("cool:", username);
             const user = await User.findByCredentials(username, password)
-            const token = await user.generateNewToken()       
+            console.log("cool2",user);
+            
+            const token = await user.generateNewToken()    
+            console.log("cool3",token);   
             return res.send({user,token})
         }   
     } catch (error) {
-        console.log("in login api Error", res.header);
+        console.log("in login api Error", res.header, error);
         
         res.status(404).end()
     }

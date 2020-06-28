@@ -13,7 +13,7 @@ export default function userProfile({user}) {
     }
     return (
         <div>
-            <NavbarHome />
+            <NavbarHome user={user} />
             <p>Inside User profile</p>
             <ul>
                 {Object.keys(user).map((obj, i) => {

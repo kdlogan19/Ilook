@@ -4,7 +4,8 @@ import {Navbar, Button, Nav, Form, FormControl, NavLink} from 'react-bootstrap';
 import Cookies from 'js-cookie'
 import {useRouter} from 'next/router'
 
-export default function NavbarHome() {
+
+export default function NavbarHome({user}) {
     const router = useRouter()
     const logout = () => {
         Cookies.remove('token')
@@ -28,11 +29,11 @@ export default function NavbarHome() {
                 <Navbar.Brand href="/">Ilook</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href="/user-pages/user-profile">Profile</Nav.Link>
-                    <Nav.Link href="#features">Timeline</Nav.Link>
+                    {/* <Nav.Link href="">Timeline</Nav.Link> */}
     
                 </Nav>
-                <NavLink href="/user-pages/user-login">Login</NavLink>
-                <NavLink onClick={logout}>Logout</NavLink>
+                {!user ? <NavLink href="/user-pages/user-login">Login</NavLink>:''}
+                {user?<NavLink onClick={logout}>Logout</NavLink>:''}
     
             </Navbar>
             <br />

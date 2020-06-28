@@ -26,6 +26,7 @@ export default function userLogin() {
                     body: JSON.stringify(form)
                     
                     })
+            console.log("user-login res: ",res)
             const data = await res.json();
             console.log("in user-login",data);
             const {token} = data

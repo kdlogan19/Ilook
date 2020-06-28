@@ -3,6 +3,7 @@ import {Formik} from 'formik'
 import * as yup from 'yup'
 import fetch from 'isomorphic-unfetch'
 import { useRouter } from 'next/router';
+import Cookie from 'js-cookie'
 
 import Navbar from '../../components/layout/navbar-home'
 
@@ -64,6 +65,11 @@ export default function userSignup() {
                     },
                     body: JSON.stringify(values)
                 })
+                const data = await res.json();
+                console.log("in user-signup",data);
+                const {token} = data
+                console.log("received:", token)
+                Cookie.set('token', token)
                 router.push("/")
                 } catch (error) {
                     console.log("Error occurred", error);

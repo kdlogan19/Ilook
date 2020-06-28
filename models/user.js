@@ -91,13 +91,14 @@ userSchema.statics.findByCredentials = async (username, password) =>  {
 userSchema.methods.generateNewToken = async function() {
     
     const user = this
-    await console.log("inside generateNewToken");
-    
-    const token = await jwt.sign({_id: user._id}, 'iamironman')
-    user.tokens = user.tokens.concat({token})
-    await user.save()
-    await console.log("inside generateNewToken2");
-    return token
+    // console.log("inside generateNewToken ccc",user);
+    try {
+        const token = await jwt.sign({_id: user._id}, 'iamironman')
+        console.log("inside generateNewToken2",token);
+        return token
+    } catch (error) {
+       console.log("Error generating token",error);      
+    }
 }
 
 

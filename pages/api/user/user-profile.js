@@ -11,7 +11,6 @@ export default async (req,res) => {
                 console.log("updated req:",userId);
                 const {project, firstName, middleName, lastName, email, username, gitProfile} = await User.findOne({'_id': userId})
                 const user = {project, firstName, middleName, lastName, email, username, gitProfile}
-                console.log("in auth: ",user);
                 res.status(200).json({user})
             } catch (error) {
                 console.log(error);
