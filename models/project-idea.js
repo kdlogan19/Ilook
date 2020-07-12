@@ -51,7 +51,7 @@ const projectIdeaSchema  = mongoose.Schema({
 projectIdeaSchema.statics.getAllProjects = async function() {
     try {
         const projects = await ProjectIdea.find().populate('userId','username').then(projects => {return projects})
-        console.log("projects in schema:", projects)
+        // console.log("projects in schema:", projects)
         return projects
     } catch (error) {
         console.log("Database query:". error)   

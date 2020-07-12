@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import Cookie from 'js-cookie'
 
-import Navbar from '../../components/layout/navbar-home'
+import Navbar from '../../components/navbar-home'
 
 export default function userLogin() {
     const [form, setForm] = useState({username: '', password: ''})

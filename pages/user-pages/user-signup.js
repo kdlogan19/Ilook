@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie'
 
-import Navbar from '../../components/layout/navbar-home'
+import Navbar from '../../components/navbar-home'
 
 import {Button, Col, Form, InputGroup} from 'react-bootstrap';
 import { CountryDropdown } from 'react-country-region-selector'

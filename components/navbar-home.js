@@ -36,7 +36,6 @@ export default function NavbarHome({user}) {
                 {user?<NavLink onClick={logout}>Logout</NavLink>:''}
     
             </Navbar>
-            <br />
         </>
     )
 }

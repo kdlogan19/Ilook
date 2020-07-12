@@ -1,5 +1,6 @@
 import '../styles/global.css'
 import cookies from 'next-cookies'
+import Head from 'next/head'
 
 // export default class extends App {
 
@@ -19,5 +20,12 @@ import cookies from 'next-cookies'
 // }
 
 export default function App({ Component, pageProps }) {    
-    return <Component {...pageProps} />
+    return (
+      <>
+        <Head>
+          <link rel="shortcut icon" href="/favicon.ico" />
+        </Head>
+        <Component {...pageProps} />
+      </>
+    )
   }
