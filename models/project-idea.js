@@ -54,7 +54,17 @@ projectIdeaSchema.statics.getAllProjects = async function() {
         // console.log("projects in schema:", projects)
         return projects
     } catch (error) {
-        console.log("Database query:". error)   
+        console.log("Database query:", error)   
+    }
+}
+
+projectIdeaSchema.statics.getProjectData = async (id) => {
+    try {
+        const project = await ProjectIdea.findById(id).then((project) => project);
+        console.log("single project:", project);
+        return project;
+    } catch (error) {
+        console.log("Database query:", error) 
     }
 }
 

@@ -85,8 +85,13 @@ export default function Home({user,projects}) {
               </div>
             </div>
           </div>
+          
         </div>
-        
+        <Link href={{ pathname: '/project/[id]', query: { name: 'test'}}}>
+            <a>
+              sdsds
+            </a>
+          </Link>
         <FooterHome />
         {/* Add a footer */}
         
@@ -148,7 +153,7 @@ export async function getServerSideProps(ctx){
   console.log("****************************************");
   const c = ctx.req.headers.cookie
   try {
-    const res = await fetch("http://localhost:3000/api/project/get-project-data", {
+    const res = await fetch("http://localhost:3000/api/project/getAllProjects", {
       method:'GET',
       headers: {
           "Accept":'application/json',
@@ -160,7 +165,7 @@ export async function getServerSideProps(ctx){
   } catch (error) {
     console.log("index pre-render", error)
   }
-  // console.log("db query res:",projects)
+  console.log("db query res:",c,projects)
   if(!c){
       return {
           props: {
@@ -169,6 +174,14 @@ export async function getServerSideProps(ctx){
         }  
   }
   const {token} = cookie.parse(c)
+  console.log("token:", token)
+  if(!token) {
+    return {
+      props: {
+        projects
+      },
+    }  
+  }
   const {userId} = await auth(token)
   if(!userId){
       return {
