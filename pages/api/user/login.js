@@ -12,10 +12,10 @@ export default async (req, res) => {
             const {username, password} = data
             console.log("cool:", username);
             const user = await User.findByCredentials(username, password)
-            console.log("cool2",user);
+            // console.log("cool2",user);
             
             const token = await user.generateNewToken()    
-            console.log("cool3",token);   
+            // console.log("cool3",token);   
             return res.send({user,token})
         }   
     } catch (error) {

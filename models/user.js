@@ -4,6 +4,7 @@ import ProjectIdea from './project-idea'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
+mongoose.set('useFindAndModify', false);
 const userSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -72,7 +73,7 @@ userSchema.statics.findByCredentials = async (username, password) =>  {
     await console.log("inside valiadtion model", username);
     
     const user = await User.findOne({username: username})    
-    console.log("in model side:",user.username);
+    // console.log("in model side:",user.username);
     
     if(!user) {
         throw new Error('User not valid')
@@ -94,7 +95,7 @@ userSchema.methods.generateNewToken = async function() {
     // console.log("inside generateNewToken ccc",user);
     try {
         const token = await jwt.sign({_id: user._id}, 'iamironman')
-        console.log("inside generateNewToken2",token);
+        // console.log("inside generateNewToken2",token);
         return token
     } catch (error) {
        console.log("Error generating token",error);      

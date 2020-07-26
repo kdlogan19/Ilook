@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import Router from 'next/router';
 import cookie from 'cookie' 
 
-import Navbar from '../../components/layout/navbar-home'
+import Navbar from '../../components/navbar-home'
 import auth from '../../middleware/auth'
 
 import {Button, Col, Form, InputGroup} from 'react-bootstrap';
@@ -25,7 +25,7 @@ const dummy = {title: '', shortDescription: '',description: '',tags: ''}
 
 export default function ideaForm({user, token}){
     if(!user){
-        return <div><NavbarHome /><div>Please Login First</div></div>
+        return <div><Navbar /><div>Please Login First</div></div>
     }
     return (<>
         <Navbar />
@@ -50,7 +50,7 @@ export default function ideaForm({user, token}){
                     console.log("Error occurred", error);
                     
                 }
-                
+                Router.push('/')
             }}
         >
             {({
