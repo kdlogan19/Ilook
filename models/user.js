@@ -4,6 +4,7 @@ import ProjectIdea from './project-idea'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
+mongoose.set('useFindAndModify', false);
 const userSchema = mongoose.Schema({
     firstName: {
         type: String,
