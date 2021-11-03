@@ -28,7 +28,7 @@
     "react-icons": "^3.10.0",
     "react-sidebar": "^3.0.2",
     "swr": "^0.2.3",
-    "validator": "^13.1.1",
+    "validator": "^13.7.0",
     "yup": "^0.29.1"
   },
   "devDependencies": {
